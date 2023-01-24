@@ -11,7 +11,7 @@ jobs:
       with:
         status: ${{ job.status }}
         channel: '#na'
-        message: 'camper'
+        message: steps.ruby_script.outputs
         if: always()
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
@@ -21,4 +21,5 @@ jobs:
     - run: gem install open-uri
     - run: gem install net-http
     - run: gem install nokogiri
-    - run: ruby main.rb
+    - id: ruby_script
+      run: ruby main.rb
