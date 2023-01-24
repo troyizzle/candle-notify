@@ -21,5 +21,5 @@ jobs:
       with:
         status: ${{ job.status }}
         channel: '#na'
-        message: ${{ steps.ruby_script.outputs.available }}
+        message: ${{ steps.ruby_script.outputs.available == 'false' }}
         if: ${{ steps.ruby_script.outputs.available == 'false' }}
