@@ -11,8 +11,8 @@ jobs:
       with:
         status: ${{ job.status }}
         channel: '#na'
-        message: steps.ruby_script.outputs
-        if: always()
+        message: 'test!'
+        if: steps.ruby_script.outputs == 'true'
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
       with:
