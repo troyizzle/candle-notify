@@ -1,11 +1,15 @@
-name: Candle!
-on: push
-
+name: My workflow
+on: [push, pull_request]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-ruby@v1
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0' # Not needed with a .ruby-version file
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - run: gem install open-uri
+    - run: gem install net/http
+    - run: gem install nokogiri
     - run: ruby main.rb
