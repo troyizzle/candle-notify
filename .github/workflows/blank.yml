@@ -1,0 +1,11 @@
+name: Candle!
+on:
+  schedule:
+  - cron: "0/15 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: ruby -r main.rb
