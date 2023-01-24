@@ -16,7 +16,7 @@ jobs:
     - run: gem install net-http
     - run: gem install nokogiri
     - id: ruby_script
-      run: echo "available=$((ruby main.rb))" >> $GITHUB_OUTPUT
+      run: echo "available=$(ruby main.rb)" >> $GITHUB_OUTPUT
     - uses: act10ns/slack@v1
       with:
         status: ${{ job.status }}
