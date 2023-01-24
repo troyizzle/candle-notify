@@ -22,4 +22,4 @@ jobs:
     - run: gem install net-http
     - run: gem install nokogiri
     - id: ruby_script
-      run: echo "::set-output name=available::$(ruby main.rb)"
+      run: echo "available=$((ruby main.rb))"
