@@ -2,8 +2,17 @@ name: My workflow
 on: [push, pull_request]
 jobs:
   test:
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
     runs-on: ubuntu-latest
     steps:
+    - uses: act10ns/slack@v1
+      with:
+        status: ${{ job.status }}
+        channel: '#na'
+        message: 'camper'
+        if: always()
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
       with:
