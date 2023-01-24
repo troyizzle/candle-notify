@@ -10,6 +10,6 @@ jobs:
         ruby-version: '3.0' # Not needed with a .ruby-version file
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: gem install open-uri
-    - run: gem install net/http
+    - run: gem install net-http
     - run: gem install nokogiri
     - run: ruby main.rb
