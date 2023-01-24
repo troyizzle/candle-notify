@@ -1,10 +1,7 @@
 name: My workflow
 on: [push, pull_request]
 jobs:
-  test:
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
+  run_script:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -17,9 +14,15 @@ jobs:
     - run: gem install nokogiri
     - id: ruby_script
       run: echo "available=$(ruby main.rb)" >> $GITHUB_OUTPUT
-    - uses: act10ns/slack@v1
-      with:
-        status: ${{ job.status }}
-        channel: '#na'
-        message: ${{ steps.ruby_script.outputs.available == 'false' }}
-        if: ${{ steps.ruby_script.outputs.available == 'false' }}
+  send_slack:
+    if: steps.ruby_script.outputs.available == 'false'
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - uses: act10ns/slack@v1
+        with:
+            status: ${{ job.status }}
+            channel: '#na'
+            message:  ${{ steps.ruby_script.outputs.available == 'false' }}
