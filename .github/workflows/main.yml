@@ -29,4 +29,4 @@ jobs:
         with:
             status: ${{ job.status }}
             channel: '#na'
-            message:  ${{ needs.run_script.outputs.available }}
+            message:  https://www.goest.us/kuroneko-sama-mr-black-cat-candle/ is available!!!
