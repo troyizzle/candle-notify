@@ -3,6 +3,8 @@ on: [push, pull_request]
 jobs:
   run_script:
     runs-on: ubuntu-latest
+    outputs:
+      available: ${{ steps.ruby_script.outputs.available }}
     steps:
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
@@ -16,7 +18,7 @@ jobs:
       run: echo "available=$(ruby main.rb)" >> $GITHUB_OUTPUT
   send_slack:
     needs: run_script
-    if: steps.ruby_script.outputs.available == 'false'
+    if: needs.run_script.outputs.available == 'false'
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -25,4 +27,4 @@ jobs:
         with:
             status: ${{ job.status }}
             channel: '#na'
-            message:  ${{ steps.ruby_script.outputs.available == 'false' }}
+            message:  ${{ needs.run_script.outputs.available }}
