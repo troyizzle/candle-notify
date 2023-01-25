@@ -15,6 +15,7 @@ jobs:
     - id: ruby_script
       run: echo "available=$(ruby main.rb)" >> $GITHUB_OUTPUT
   send_slack:
+    needs: run_script
     if: steps.ruby_script.outputs.available == 'false'
     runs-on: ubuntu-latest
     env:
