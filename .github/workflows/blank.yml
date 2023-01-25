@@ -18,7 +18,7 @@ jobs:
       run: echo "available=$(ruby main.rb)" >> $GITHUB_OUTPUT
   send_slack:
     needs: run_script
-    if: needs.run_script.outputs.available == 'false'
+    if: needs.run_script.outputs.available == 'true'
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
