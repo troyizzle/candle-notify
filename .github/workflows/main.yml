@@ -1,7 +1,4 @@
 name: My workflow
-on:
-  schedule:
-  - cron: "0/15 * * * *"
 jobs:
   run_script:
     runs-on: ubuntu-latest
